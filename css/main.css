@@ -1,0 +1,693 @@
+/**
+	Afresh - Parallax Responsive Creative Portfolio
+ 	Copyright (c) 2012, Subramanian 
+
+	Author: Subramanian
+    Profile: themeforest.net/user/FMedia/
+	
+    Version: 1.0.0
+	Release Date: 14 December 2012
+	
+**/
+
+
+	body{
+		margin:0px 0px 0px 0px;
+		padding: 0px 0px 0px 0px;
+
+		overflow-x:hidden; overflow-y:scroll;
+	}
+
+	html, body {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+
+	
+	#bodyContent {
+		position:relative; clear:both; z-index:998; width:auto;
+	}
+	
+		#backArea	{ position:relative;top:0px; left:0px; overflow:hidden; width:5px; z-index:9 }
+	
+		.dynamicLoad{ position:relative; }
+		
+		/* main container */
+		.mainContainer{
+			position: relative;
+			overflow-x: hidden;
+			overflow-y:auto;
+			top:0px;
+			left:0px;
+			height: auto !important;
+			margin: 0 auto -35px; 	 	
+			padding-bottom:35px;
+		}
+
+		
+.header{
+	width:100%;
+	position:fixed;
+	margin:0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	top:0px;
+	z-index:1003;	
+	}
+		
+	/* Header style. The menu style are placed here */
+	.header .headerContent{ 
+		padding:0px;
+		margin: 0 auto;
+		}
+				
+		.header .headerContent .nav{
+			float: right; display: inline; 
+			margin-left: 0px; margin-right: 10px;
+			margin-top:20px;
+			}
+				
+			/*.header .headerContent .nav ul{ display:none; }*/
+				
+			.header  .headerContent #mobile_nav, .header .headerContent .nav ul li{
+				float:left;
+				left:0px;
+				display: block;
+				margin:0 auto;
+				cursor:pointer ;
+				list-style:none;
+				}
+				
+				.header .headerContent .nav ul li a{
+					height:100%;
+					padding:20px 15px 15px 15px;
+					display: block;
+					text-align:center;
+					cursor:pointer ;
+				}
+				
+				.header .headerContent .nav ul li ul {
+					position:absolute;
+					top:0px;
+					float:left;
+					display: inline-block;
+					margin: 0 auto;
+					cursor:pointer ;
+					list-style:none;
+					z-index:1000;
+					overflow:hidden;
+					
+				}
+				
+				.header .headerContent .nav ul li ul li {
+					position:relative;
+					float:none;
+					display: block;
+					cursor:pointer ;
+					list-style:none;
+				}
+				
+				
+				.header .headerContent .nav ul li ul li a{
+					padding:10px 15px 10px 15px;
+				}
+				
+				.header .headerContent .nav ul li ul li a.first{ padding:20px 15px 10px 15px; }
+				.header .headerContent .nav ul li ul li a.last{ padding:10px 15px 20px 15px; }
+				
+				.header .headerContent .nav ul li a{
+					
+					-webkit-transition-property:color, background;   
+ 					-webkit-transition-duration: .25s, .25s;   
+ 					-webkit-transition-timing-function: linear, ease-in;
+					
+					-moz-transition-property:color, background;   
+ 					-moz-transition-duration: .25s, .25s;   
+ 					-moz-transition-timing-function: linear, ease-in;
+					
+					-o-transition-property:color, background;   
+ 					-o-transition-duration: .25s, .25s;   
+ 					-o-transition-timing-function: linear, ease-in;
+					
+					-ms-transition-property:color, background;   
+ 					-ms-transition-duration: .25s, .25s;   
+ 					-ms-transition-timing-function: linear, ease-in;
+	
+				}
+				
+				.header  .headerContent #mobile_nav{
+					position:absolute;
+					display:none;
+					padding:13px 15px 15px 17px;
+					top:3px;
+				}
+				
+				.header  .headerContent .highlight{
+					height:15px;
+					position:absolute;
+					top:70px;
+					width:0px;
+					margin:0px 0px 0px 0px;
+					padding:0px;
+					background : transparent url(../images/menu_highlight_arrow.png) no-repeat 50% 100%; 
+				}
+
+				.header .topContact {
+					float: right; display: inline; margin-top: 15px; margin-right: 10px;
+					width: 180px;
+					text-align:right;
+				}
+
+				.header .headerContent li a, .header .headerContent li a:visited { color:inherit; text-decoration: none; outline: 0; }
+				.header .headerContent li a:hover, .header .headerContent li a:focus { color:inherit; }
+				.header .headerContent li a:visited { color:inherit; text-decoration: none; }	
+				
+				.pageFade { 
+					width:100%; 
+					height:100%;
+					position:fixed; 
+					z-index:1000000;
+					overflow:hidden;
+					background-color:#ececec;
+					top:0px;  
+					left:0;
+				 } 
+				
+				
+		/* Footer style */
+		
+		
+		.footer {
+			position: relative;
+			margin: 0 auto;
+			display: none;
+			width:100%;
+			padding:0px 0px 0px 0px;
+			bottom:-35px;
+			z-index:9999;
+		}
+		.footer .container{
+			margin: 0 auto;
+			top:0px;
+			
+		}
+		.footer .container .bottomText{
+			margin-top:10px;
+		}
+		
+		/* Logo and page content style*/
+		.contentWarp{
+			margin:0px 0px 0px 0px;
+			padding: 0px 0px 0px 0px;
+			height:auto;
+			overflow:hidden;
+		}
+
+		.mainContainer .logo {
+			position:relative;
+			float:left;
+			height:50px;
+			z-index:0;
+		}
+		
+			.mainContainer .logo img{
+				position: absolute;
+				bottom:0px;
+				
+			}
+		
+		
+		/* Logo and page content style*/
+		.contentWarp{
+			width:100%; 
+			overflow-x:hidden;
+			position:relative; 
+			clear:both;
+			margin:0px 0px 0px 0px;
+			padding: 0px 0px 0px 0px;
+			z-index:997
+		}
+
+		.logo { 
+			position:absolute; 
+			padding-top:0px; 
+			padding-bottom:20px;
+		}
+		
+		
+		/* page load container  */
+		.pageHolder { margin:0 auto; position:relative; float:left; }
+		
+			.page {
+				float:left;
+				position:relative;
+				top:0px;
+				left:0px;
+				margin:100px 0px 100px 0px;
+			}
+			
+			.page .pgContent {
+				width: 940px; 
+				float: left; 
+				display: inline;
+				margin:0px;
+				
+								
+			}
+			
+
+/* Enable hardware Acceleration */
+	.enablHardwareAcc {  
+		-webkit-backface-visibility: hidden;
+  		-webkit-perspective: 1000;
+		-webkit-transform: translateZ(0);
+		}
+	.scroll-pane {  
+		-webkit-backface-visibility: hidden;
+  		-webkit-perspective: 1000;
+		-webkit-transform: translateZ(0);
+		}
+/*
+
+
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+.jspContainer { overflow: hidden; position: relative; margin-right:10px; }
+.jspPane { position: absolute; }
+.jspVerticalBar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 10px;
+	height: 100%;
+}
+.jspHorizontalBar{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 12px;
+}
+.jspVerticalBar *,
+.jspHorizontalBar * { margin: 0; padding: 0; }
+.jspCap { display: none; }
+.jspHorizontalBar .jspCap { float: left; }
+.jspTrack { position: relative; }
+.jspDrag{
+	position: relative;
+	top: 0; left: 0; cursor: pointer; margin:1px 0px 0px 0px;
+	
+	-moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag { float: left; height: 100%;  }
+.jspArrow{ text-indent: -20000px; display: block; cursor: pointer; }
+.jspArrow.jspDisabled { cursor: default; }
+.jspVerticalBar .jspArrow { height: 12px; }
+.jspHorizontalBar .jspArrow { width: 12px; float: left; height: 100%; }
+.jspVerticalBar .jspArrow:focus { outline: none; }
+.jspCorner { float: left; height: 100%; }
+
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner { margin: 0 -3px 0 0; }
+
+/* Site loading style */	
+.loading {
+	background: url(../images/loading.gif) no-repeat center center;
+	height:32px;
+	width:32px; 
+	position:absolute;
+	overflow:hidden;
+	z-index:1000001;
+}
+
+/* Email loading style */		
+.email_loading {
+	background: url(../images/email_loading.gif) no-repeat center center;
+	height:32px;
+	width:32px; 
+	position:absolute;
+	z-index:0;
+}
+
+/* flex slider loading  */
+.slider_loading {
+	background: url(../images/loader.gif) no-repeat center center;
+	height:32px;
+	width:32px; 
+	position:relative;
+	z-index:1;
+	margin: 0 auto;
+}
+
+.fsLoading {
+	background: url(../images/loading_fs.gif) no-repeat center center;
+	height:32px;
+	width:32px; 
+	position:absolute;
+	z-index:1;
+	bottom:180px;
+	right:5px;
+}
+
+/* Email reply message style */	
+#reply_message { position:relative; left:20px; text-align:left; float:left; }
+	
+
+/* full size and medium size content scrollbar*/
+.medium_size  { height: 280px; overflow:hidden  }
+.full_size  { height: 420px; overflow:hidden }
+
+	
+/* vegas style */
+.vegas-loading {
+
+	background:#000 url(images/loading.gif) no-repeat center center;
+	background:rgba(0, 0, 0, 0.7) url(../images/loading.gif) no-repeat center center;
+	height:32px;
+	width:32px; 
+	position:absolute;
+	z-index:0;
+}
+
+.vegas-overlay {
+	background:transparent url(../images/background_overlay.png);
+	position:fixed;
+	opacity:0.5;
+	z-index:-1;
+}
+	
+.vegas-background {
+	image-rendering: optimizeQuality;
+	-ms-interpolation-mode: bicubic;
+	position:absolute;
+	overflow:hidden;
+	z-index:-3;		
+}
+
+/* Text animate */
+.animate { overflow:hidden; }
+
+/* Start: Graph Style */
+.graph_container { position:relative; width:100%; padding:0;  margin-top:0px; }
+.graph_container ul { margin:0; padding:0; list-style:none; overflow-y:hidden; }
+.graph_container li { width:100%; height:20px; margin:0 0px 15px 0; position:relative; }
+.graph_container li.last { margin:0; }
+.graph_container li span { position:absolute; z-index:1; margin:1px 0px 0px 15px; padding:0px; color:#000; font-size:11px; }
+.graph_container li a { position:absolute; left:0; width:0px; height:20px; }
+	
+	
+
+/* Start Isotope*/
+								 
+/* Start: Recommended Isotope styles */
+	
+/**** Isotope Filtering ****/
+	
+.isotope-item { z-index: 2; }
+.isotope-hidden.isotope-item {  pointer-events: none; z-index: 1; }
+	
+/**** Isotope CSS3 transitions ****/
+	
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+	 -moz-transition-duration: 0.8s;
+	  -ms-transition-duration: 0.8s;
+	   -o-transition-duration: 0.8s;
+		  transition-duration: 0.8s;
+}
+	
+.isotope {
+  -webkit-transition-property: height, width;
+	 -moz-transition-property: height, width;
+	  -ms-transition-property: height, width;
+	   -o-transition-property: height, width;
+		  transition-property: height, width;
+}
+	
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+	 -moz-transition-property:    -moz-transform, opacity;
+	  -ms-transition-property:     -ms-transform, opacity;
+	   -o-transition-property:         top, left, opacity;
+		  transition-property:         transform, opacity;
+}
+
+	
+/**** disabling Isotope CSS3 transitions ****/
+	
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+	 -moz-transition-duration: 0s;
+	  -ms-transition-duration: 0s;
+	   -o-transition-duration: 0s;
+		  transition-duration: 0s;
+}
+	
+/* End: Recommended Isotope styles */
+	
+	
+/* disable CSS transitions for containers with infinite scrolling*/
+.isotope.infinite-scrolling {
+  -webkit-transition: none;
+	 -moz-transition: none;
+	  -ms-transition: none;
+	   -o-transition: none;
+		  transition: none;
+}
+	
+/**** isotope image Initialize ****/
+.isotope_items 			{ overflow:hidden; }
+.isotope_items img 		{ display: block;  width: 100%; }
+.isotope_items .item 		{ width: 216px; height:138px; margin: 1px; float: left; }
+.isotope_items .large 	{ width: 230px; height:145px; }
+.isotope_items .medium	{ width: 170px; height:110px; }
+.isotope_items .small 	{ width: 138px; height:90px; }
+	
+/* End Isotope*/
+	
+
+/* flex slider style */
+#flexslider-container {max-width: 900px; height: 100%; margin: 5px 0px 0px 0px; }
+.flexslider .slides { overflow:hidden;}
+.flexslider ul li, .flexslider .slides { margin:0px; padding:0px;}
+.flex-caption { visibility:hidden}
+#bodyContent .flex-caption { visibility:visible}
+
+
+/* video style */
+.video_content { width:600px; height:255px; margin: 0 auto; cursor:pointer; background-color:#000; overflow:hidden; }
+.addVideo { position:relative; background-color:#000; overflow:hidden;}
+.vid { width:100%; height:100%; position:relative; top:0px; left:0px; margin: 0 auto; visibility:visible; z-index:5;}
+
+/* spacing */
+.noSpacing { margin:0px; }
+
+
+.pageHidden{
+	width:300px;
+	height:50px;
+	position:absolute;
+	overflow:hidden;
+}
+	
+.pageShow{
+	width:auto;
+	height:auto;
+	position:relative;
+	overflow:visible;
+}	
+
+.isotope_option { position:relative; float: right; display:none; }
+#options{ margin-right:5px; }
+
+ .scroll-pane { width:auto; }
+ 
+/* Hand cursor */
+
+.fm_drag-cursor{cursor:move;}
+.fm_drag-cursor{cursor:url("../images/cursors/openhand.png") 8 8,-moz-grab;}
+.fm_drag-cursor{*cursor:url(../images/cursors/openhand.cur);}
+.fm_drag-cursor{cursor:url(images/cursors/openhand.cur);}
+
+.fm_draging-cursor{cursor:move;}
+.fm_draging-cursor{cursor:url("../images/cursors/closedhand.png") 8 8,-moz-grabbing;}
+.fm_draging-cursor{*cursor:url(../images/cursors/closedhand.cur);}
+.fm_draging-cursor{cursor:url(images/cursors/closedhand.cur);}
+ 
+ .proPadLef { padding-left:20px; }
+ 
+/* Note: Design for a width of 768px */
+
+@media only screen and (min-width: 768px) and (max-width: 1150px) {
+	
+	.mainHeader{ position:fixed;  }
+	
+	#bodyContent .flex-caption { visibility:visible}
+	
+	.jspVerticalBar { width: 5px; }
+	
+	#options{ margin-right:5px;}
+	
+	.page .pgContent { width: 748px; }
+	
+	.page { margin:20px 0px 10px 0px; }
+	
+	/* Header - Menu style */
+	/*.header{ position:relative; }*/
+	.header .headerContent .nav{ width: 575px; }
+	.header .headerContent .nav ul{ position:inherit; top:0px; display:block;  z-index:inherit; }
+	.header .headerContent .nav li{ float:left; margin:0px;  }	
+	.header .headerContent .nav ul li  a{ padding:20px 15px 15px 15px; }
+	.header .headerContent .highlight{ display:block; }
+	.header .headerContent #mobile_nav{ display:none; position:absolute; }	
+	.header .topContact { width: 160px;  margin-top: 10px; }
+	
+	/* full screen gallery */
+	#fsGalNex{ right:-10px;  top:30px; }
+	#fsGalPre{ left:-3px; top:30px; }
+	
+	.proPadLef { padding-left:20px; }
+	
+	#options{ margin-right:50px;}
+	
+}
+
+
+/* Note: Design for a width of 320px */
+@media only screen and (max-width: 767px) {		
+	body{ overflow-x:hidden; overflow-y: auto; }
+	
+	.mobile_header { position:absolute; } 	
+	
+	.mainHeader{ position:absolute; height:auto;  }
+	.mainContainer .logo { height:45px; padding:5px 0px 0px 0px; }
+
+	/* Header - Menu style */
+	.header{ position:relative; }
+	.header .headerContent .nav{ width: 110px;	}
+	.header .headerContent .nav ul{ position:absolute; top:52px; display:none; z-index:10;}
+	.header .headerContent .nav ul li{ float:none; margin:0px; }
+	.header .headerContent .nav ul li a{ padding:15px 15px 10px 15px; margin: 0px; }
+	.header .headerContent .nav ul li .last{ padding-bottom:15px;}
+	.header .headerContent .highlight{ display:none; }
+	.header .headerContent #mobile_nav{ display:block;  position:relative; padding-top:0px;}
+	.header .topContact { width: 150px; }		
+	
+	.header  .headerContent .highlight{ background : none;  }
+	
+	.header .headerContent .nav ul li ul { float:none; position:relative;  display:none; margin:0px;  }
+	.header .headerContent .nav ul li ul  li {float:none; margin:0px;top:0px; }
+	.header .headerContent .nav ul li ul li a{ padding:15px 15px 10px 15px; margin: 0px; }
+	
+	.header .headerContent .nav ul li ul li a.first{ padding:20px 15px 10px 15px; }
+	.header .headerContent .nav ul li ul li a.last{ padding:10px 15px 20px 15px; }
+	
+	/*  Page style */
+	.pageHolder{ width: 300px; }
+	.page .pgContent { position:relative; margin:0px; padding:0px; width:auto; height:auto; overflow:visible;  }
+
+
+	/* full size and medium size content scrollbar*/
+	.medium_size { height: 100%;  }
+	.full_size { height: 100%;  margin-top:10px;  }
+		
+	.mainContainer{ overflow-y:hidden; }
+	/*.logo { height:50px; }*/
+	.video_content { width:280px; height:120px;}
+		
+	#flexslider-container {max-width: 320px; height:100%; margin: 0px}
+	#flexslider-container img{ width:100%; max-height:100% }
+	#bodyContent .flex-caption { visibility:hidden}
+	#flexslider-container .flex-control-nav { position:relative; bottom: -15px;}
+	#flexslider-container .flex-direction-nav { visibility:hidden }
+	
+	.isotope_option {  width:300px; float:left;  }
+	#options{ margin-right:-10px;}
+	
+	/* full screen gallery */
+	.fs_gallery{ left:7px;  }
+	.fs_thumbs{ width:265px; }
+	#fsCloGal{ right: -5px;  top: 25px; }
+	#fsGalNex{ right:-10px; top:55px; }
+	#fsGalPre{ left:-0px; top:55px;  }
+	
+	.scroll-pane { height: auto; overflow: visible; }	
+	
+	.proPadLef { padding-left:0px; }
+}
+ 
+
+/* Note: Design for a width of 480px */
+@media only screen and (min-width: 480px) and (max-width: 767px) {		
+	body{ overflow-x:hidden; overflow-y: auto; }
+	
+	.mobile_header { position:absolute; } 	
+	
+	.mainHeader{ position:absolute; height:auto;  }
+	
+	.mainContainer .logo { height:45px; padding:5px 0px 0px 0px; }
+
+	/* Header - Menu style */
+	.header{ position:relative; }
+	.header .headerContent .nav{ width: 200px;	}
+	.header .headerContent .nav ul{ position:absolute; top:52px; display:none; z-index:10;}
+	.header .headerContent .nav ul li{ float:none; margin:0px; }
+	.header .headerContent .nav ul li a{ padding:15px 15px 10px 15px; margin: 0px; }
+	.header .headerContent .nav ul li .last{ padding-bottom:15px;}
+	.header .headerContent .highlight{ display:none; }
+	.header .headerContent #mobile_nav{ display:block;  position:relative; padding-top:0px;}
+	.header .topContact { width: 190px; }	
+	
+	.header  .headerContent .highlight{ background : none;  }
+	
+	.header .headerContent .nav ul li ul { float:none; position:relative; display:none;  margin:0px;  }
+	.header .headerContent .nav ul li ul  li {float:none; margin:0px;top:0px; }
+	.header .headerContent .nav ul li ul li a{ padding:15px 15px 10px 15px; margin: 0px; }
+	
+	.header .headerContent .nav ul li ul li a.first{ padding:20px 15px 10px 15px; }
+	.header .headerContent .nav ul li ul li a.last{ padding:10px 15px 20px 15px; }
+	
+	/*  Page style */
+	.pageHolder{ width: 420px; }
+	.page .pgContent { position:relative; margin:0px; padding:0px; width:auto; height:auto; overflow:visible;  }
+
+	/* full size and medium size content scrollbar*/
+	.medium_size { height: 100%;  }
+	.full_size  { height: 100%;   margin-top:10px;  }
+			
+	.mainContainer{ overflow-y:hidden; }
+	.video_content { width:400px; height:165px;}
+		
+	#flexslider-container {width: 460px; max-height:100%; margin: 20px}
+	#flexslider-container img{ width:100%; max-height:100% }
+	#bodyContent .flex-caption { visibility:hidden}
+	#flexslider-container .flex-control-nav { position:relative; bottom: -15px;}
+	#flexslider-container .flex-direction-nav { visibility:hidden; }
+	
+	.isotope_option { width:400px;  float:left;}
+	#options{ margin-right:-10px;}
+	.isotope_items{ left:10px;}
+	
+	/* full screen gallery */
+	.fs_gallery{ left:5px; }
+	.fs_thumbs{ width:390px; }
+	#fsCloGal{ right: -5px;  top: 25px; }
+	#fsGalNex{ right:-10px; top:55px; }
+	#fsGalPre{ left: -5px; top:55px; }	
+	
+	.scroll-pane { height: auto; overflow: visible; }
+	
+	.proPadLef { padding-left:0px; }
+
+}
