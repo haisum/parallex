@@ -1,0 +1,11 @@
+2013/03/21 17:25:42 [error] [exception.CException] exception 'CException' with message 'Property "CUrlManager.scriptName" is not defined.' in /var/www/parallex/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/parallex/framework/YiiBase.php(220): CComponent->__set('scriptName', false)
+#1 /var/www/parallex/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/parallex/framework/base/CApplication.php(510): CModule->getComponent('urlManager')
+#3 /var/www/parallex/framework/web/CWebApplication.php(140): CApplication->getUrlManager()
+#4 /var/www/parallex/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#5 /var/www/parallex/paral/index.php(13): CApplication->run()
+#6 {main}
+REQUEST_URI=/parallex/paral/
+---

@@ -1,7 +1,0 @@
-image3 2.jpg
-image1 2.jpg
-image1.jpg
-image4.jpg
-realmedia.gif
-video.gif
-
