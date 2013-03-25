@@ -5,13 +5,36 @@ $this->breadcrumbs=array(
 	$this->module->id,
 );
 ?>
-<h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1>
+<h1>Admin Dashboard</h1>
 
 <p>
-This is the view content for action "<?php echo $this->action->id; ?>".
-The action belongs to the controller "<?php echo get_class($this); ?>"
-in the "<?php echo $this->module->id; ?>" module.
-</p>
-<p>
-You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
+	<?php
+	$this->widget('zii.widgets.CMenu', array(
+	    'items'=>array(
+	        // Important: you need to specify url as 'controller/action',
+	        // not just as 'controller' even if default acion is used.
+	        array('label'=>'Programs', 'url'=>array('/admin/program/index'), 'items'=>array(
+	            array('label'=>'Create', 'url'=>array('/admin/program/create')),
+	            array('label'=>'Manage', 'url'=>array('/admin/program/admin')),
+	        )),
+	        // 'Products' menu item will be selected no matter which tag parameter value is since it's not specified.
+	        array('label'=>'Users', 'url'=>array('/admin/user/index'), 'items'=>array(
+	            array('label'=>'Create', 'url'=>array('/admin/user/create')),
+	            array('label'=>'Manage', 'url'=>array('/admin/user/admin')),
+	        )),
+	        array('label'=>'Comments', 'url'=>array('/admin/comment/index'), 'items'=>array(
+	            array('label'=>'Create', 'url'=>array('/admin/comment/create')),
+	            array('label'=>'Manage', 'url'=>array('/admin/comment/admin')),
+	        )),
+	        array('label'=>'Images', 'url'=>array('/admin/image/index'), 'items'=>array(
+	            array('label'=>'Create', 'url'=>array('/admin/image/create')),
+	            array('label'=>'Manage', 'url'=>array('/admin/image/admin')),
+	        )),
+	        array('label'=>'Configuration', 'url'=>array('/admin/config/index'), 'items'=>array(
+	            array('label'=>'Create', 'url'=>array('/admin/config/create')),
+	            array('label'=>'Manage', 'url'=>array('/admin/config/admin')),
+	        ))
+	    ),'htmlOptions'=>array('class'=>'operations'),
+	));
+	?>
 </p>
