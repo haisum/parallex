@@ -29,12 +29,13 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		$this->layout = "//layouts/columnParallax";
+		$model = Program::model();
 		$data = array(
 			"fbJsSdk" => $this->renderPartial("fb-js-sdk", null, true),
 			"static" => array(
-				"music" => $this->renderPartial("static/music", null, true),
-				"drama" => $this->renderPartial("static/drama", null, true),
-				"shows" => $this->renderPartial("static/shows", null, true),
+				"music" => $this->renderPartial("static/music", $model->getPrograms(1), true),
+				"drama" => $this->renderPartial("static/drama", $model->getPrograms(2), true),
+				"shows" => $this->renderPartial("static/shows", $model->getPrograms(3), true),
 				"schedule" => $this->renderPartial("static/schedule", null, true),
 				"live" => $this->renderPartial("static/live", null, true),
 				"mobile" => $this->renderPartial("static/mobile", null, true)
