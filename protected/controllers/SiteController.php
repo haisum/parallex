@@ -31,10 +31,10 @@ class SiteController extends Controller
 		$this->layout = "//layouts/columnParallax";
 		$model = new ProgramDetail;
 		$programs = array(
-			"music" => $model->getPrograms(1),
-			"drama" => $model->getPrograms(2),
-			"shows" => $model->getPrograms(3)
-		)
+			"music" => $model->getPrograms(Yii::app()->params["app"]["programTypes"]["music"]),
+			"drama" => $model->getPrograms(Yii::app()->params["app"]["programTypes"]["drama"]),
+			"shows" => $model->getPrograms(Yii::app()->params["app"]["programTypes"]["shows"])
+		);
 		$data = array(
 			"fbJsSdk" => $this->renderPartial("fb-js-sdk", null, true),
 			"static" => array(
@@ -44,14 +44,6 @@ class SiteController extends Controller
 				"schedule" => $this->renderPartial("static/schedule", null, true),
 				"live" => $this->renderPartial("static/live", null, true),
 				"mobile" => $this->renderPartial("static/mobile", null, true)
-			),
-			"hidden" => array(
-				"video_gallery" => $this->renderPartial("hidden/video_gallery", null, true),
-				"music_gallery" => $this->renderPartial("hidden/music_gallery", null, true),
-				"advertise" => $this->renderPartial("hidden/advertise", null, true),
-				"video_submission" => $this->renderPartial("hidden/video_submission", null, true),
-				"contact" => $this->renderPartial("hidden/contact", null, true),
-				"career" => $this->renderPartial("hidden/career", null, true)
 			),
 			"pages" => array(
 				"home"  => $this->renderPartial("pages/home", null, true),

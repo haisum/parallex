@@ -92,7 +92,6 @@ Note: Don't edit main frame, except comment area
 
 </div>
 <?php echo $static["music"] . $static["drama"] . $static["shows"] . $static["schedule"] . $static["live"] . $static["mobile"]; ?>
-<?php echo $hidden["video_gallery"] . $hidden["music_gallery"] . $hidden["advertise"] . $hidden["video_submission"] . $hidden["contact"] . $hidden["career"]; ?>
 
 <!-- Hidden Bottom Page -->
        
