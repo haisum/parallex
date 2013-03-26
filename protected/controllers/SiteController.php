@@ -29,13 +29,18 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		$this->layout = "//layouts/columnParallax";
-		$model = Program::model();
+		$model = new ProgramDetail;
+		$programs = array(
+			"music" => $model->getPrograms(1),
+			"drama" => $model->getPrograms(2),
+			"shows" => $model->getPrograms(3)
+		)
 		$data = array(
 			"fbJsSdk" => $this->renderPartial("fb-js-sdk", null, true),
 			"static" => array(
-				"music" => $this->renderPartial("static/music", $model->getPrograms(1), true),
-				"drama" => $this->renderPartial("static/drama", $model->getPrograms(2), true),
-				"shows" => $this->renderPartial("static/shows", $model->getPrograms(3), true),
+				"music" => $this->renderPartial("static/music", $programs["music"], true),
+				"drama" => $this->renderPartial("static/drama", $programs["drama"], true),
+				"shows" => $this->renderPartial("static/shows", $programs["shows"], true),
 				"schedule" => $this->renderPartial("static/schedule", null, true),
 				"live" => $this->renderPartial("static/live", null, true),
 				"mobile" => $this->renderPartial("static/mobile", null, true)
@@ -112,7 +117,27 @@ class SiteController extends Controller
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
 		{
-			echo CActiveForm::validate($model);
+			$response = CActiveForm::validate($model);
+			if(isset($_POST['source']) && $_POST['source'] === 'site'){
+				$message = json_decode($response, true);
+				if(empty($message) && isset($_POST['LoginForm'])){
+					$model->attributes=$_POST['LoginForm'];
+					if($model->login()){
+						$message["status"] = "ok";
+						$message["name"] = Yii::app()->user->name;
+					}
+					else{
+						$message["status"]	= "fail";
+					}
+				}
+				else{
+					$message["status"]	= "fail";
+				}
+				echo json_encode($message);
+			}
+			else{
+				echo $response;
+			}
 			Yii::app()->end();
 		}
 
@@ -126,6 +151,26 @@ class SiteController extends Controller
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
+	}
+
+	public function actionRegister(){
+		if(isset($_POST["User"])){
+			$user = new User;
+			$user->attributes = ($_POST["User"]);
+			$user->registerDate = date("Y-m-d H:i:s", time());
+			$user->lastLogin = $user->registerDate;
+			$user->type = Yii::app()->params["app"]["userTypes"]["normal"];
+			$response = CActiveForm::validate($user);
+			$message["response"] = json_decode($response);
+			if(empty($message["response"])){
+				$user->save(false);
+				$message["status"] = "ok";
+			}
+			else{
+				$message["status"] = "fail";
+			}
+			echo json_encode($message);
+		}
 	}
 
 	/**

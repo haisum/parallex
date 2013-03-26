@@ -30,9 +30,9 @@ $this->breadcrumbs=array(
 	            array('label'=>'Create', 'url'=>array('/admin/image/create')),
 	            array('label'=>'Manage', 'url'=>array('/admin/image/admin')),
 	        )),
-	        array('label'=>'Configuration', 'url'=>array('/admin/config/index'), 'items'=>array(
-	            array('label'=>'Create', 'url'=>array('/admin/config/create')),
-	            array('label'=>'Manage', 'url'=>array('/admin/config/admin')),
+	        array('label'=>'Settings', 'url'=>array('/admin/setting/index'), 'items'=>array(
+	            array('label'=>'Create', 'url'=>array('/admin/setting/create')),
+	            array('label'=>'Manage', 'url'=>array('/admin/setting/admin')),
 	        ))
 	    ),'htmlOptions'=>array('class'=>'operations'),
 	));

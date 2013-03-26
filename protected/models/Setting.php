@@ -1,19 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "config".
+ * This is the model class for table "setting".
  *
- * The followings are the available columns in table 'config':
+ * The followings are the available columns in table 'setting':
  * @property string $id
+ * @property string $category
  * @property string $key
  * @property string $value
  */
-class Config extends CActiveRecord
+class Setting extends CActiveRecord
 {
+	public $category = "system";
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Config the static model class
+	 * @return Setting the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +27,7 @@ class Config extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'config';
+		return 'setting';
 	}
 
 	/**
@@ -36,12 +38,12 @@ class Config extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('key, value', 'required'),
+			array('category, key, value', 'required'),
+			array('category, value', 'length', 'max'=>255),
 			array('key', 'length', 'max'=>100),
-			array('value', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, key, value', 'safe', 'on'=>'search'),
+			array('id, category, key, value', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +65,7 @@ class Config extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'category' => 'Category',
 			'key' => 'Key',
 			'value' => 'Value',
 		);
@@ -76,10 +79,11 @@ class Config extends CActiveRecord
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
-
+		$this->value = Yii::app()->setting->get($this->key, $this->category);
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
+		$criteria->compare('category',$this->category,true);
 		$criteria->compare('key',$this->key,true);
 		$criteria->compare('value',$this->value,true);
 

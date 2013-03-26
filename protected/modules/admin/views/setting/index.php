@@ -1,18 +1,18 @@
 <?php
-/* @var $this ConfigController */
+/* @var $this SettingController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Configs',
+	'Settings',
 );
 
 $this->menu=array(
-	array('label'=>'Create Config', 'url'=>array('create')),
-	array('label'=>'Manage Config', 'url'=>array('admin')),
+	array('label'=>'Create Setting', 'url'=>array('create')),
+	array('label'=>'Manage Setting', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Configs</h1>
+<h1>Settings</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

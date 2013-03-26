@@ -22,9 +22,15 @@ Note: Don't edit main frame, except comment area
         </div>
 		
 		<div class="top-links">
-			<a id="fb-login-button"><img src="images/fb-login.png" /></a>
-			<a href="#login" class="top-link"> Login </a>
-			<a href="#register" class="top-link"> Register </a>
+			<div id="guest-menu" <?php if(!Yii::app()->user->isGuest){ ?> style="display:none;" <?php } ?>>
+				<a id="fb-login-button"><img src="images/fb-login.png" /></a>
+				<a href="#login" class="top-link"> Login </a>
+				<a href="#register" class="top-link"> Register </a>
+			</div>
+			<div id="authenticated-menu"<?php if(Yii::app()->user->isGuest){ ?> style="display:none;" <?php } ?>>
+				<div class="top-link" id="current-user" style="color:white;">Welcome, <?php echo Yii::app()->user->name; ?>&nbsp;</div>
+				<a href="<?php echo $this->createUrl('/site/logout'); ?>" class="top-link"> Logout </a>
+			</div>
 			<form class="top-link" id="search-form">
 				<input type="text" value="Search Keywords" id="search" name="search"  
 					onfocus="if(this.value == 'Search Keywords') {this.value = '';}"  

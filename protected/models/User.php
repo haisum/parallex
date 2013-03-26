@@ -44,7 +44,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('firstName, lastName, email, website, address, password, birthday, lastLogin, registerDate', 'required'),
+			array('firstName, lastName, email, address, password, birthday', 'required'),
+			array('email', 'email'),
+			array('email', 'unique'),
+			array('birthday', 'date', 'format' => 'yyyy-MM-dd'),
+			array('birthday' , 'compare', 'operator'=>'>','compareValue' => '1930-01-01'),
+			array('birthday' , 'compare', 'operator'=>'<','compareValue' => '2010-01-01'),
 			array('type', 'numerical', 'integerOnly'=>true),
 			array('firstName, lastName, email, website, password', 'length', 'max'=>255),
 			// The following rule is used by search().

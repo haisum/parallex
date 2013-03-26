@@ -45,19 +45,21 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
+		'session' => array(
+			"class" => "CHttpSession",
+			"autoStart" => true
+		),
+		'authManager'=>array(
+            'class'=>'CPhpAuthManager',
+            'defaultRoles'=>array('authenticated', 'admin'),
+        ),
 		
 		/*'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),*/
 		// uncomment the following to use a MySQL database
 		
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=mediaban_nex1tv',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
-		),
+		'db'=> require(dirname(__FILE__).DIRECTORY_SEPARATOR."db.php"),
 		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
@@ -78,6 +80,19 @@ return array(
 				*/
 			),
 		),
+		'cache'=>array(
+            'class'=>'system.caching.CFileCache',
+        ),
+		'setting'=>array(
+	        'class'             => 'application.extensions.CmsSettings',
+	        'cacheComponentId'  => 'cache',
+	        'cacheId'           => 'global_website_settings',
+	        'cacheTime'         => 84000,
+	        'tableName'     	=> 'setting',
+	        'dbComponentId'     => 'db',
+	        'createTable'       => true,
+	        'dbEngine'      	=> 'InnoDB',
+        ),
 	),
 
 	// application-level parameters that can be accessed
@@ -85,5 +100,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+		'app' => require(dirname(__FILE__).DIRECTORY_SEPARATOR."app.php")
 	),
 );

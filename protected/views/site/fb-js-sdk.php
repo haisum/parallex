@@ -3,7 +3,7 @@
 	window.fbAsyncInit = function() {
 		// init the FB JS SDK
 		FB.init({
-			appId      : '111454652362194', // App ID from the App Dashboard
+			appId      : "<?php echo Yii::app()->setting->get("facebook-app-id"); ?>", // App ID from the App Dashboard
 			channelUrl : "<?php echo $this->createUrl('site/channel');?>", // Channel File for x-domain communication
 			status     : true, // check the login status upon init?
 			cookie     : true, // set sessions cookies to allow your server to access the session?
@@ -36,38 +36,55 @@
 		function(data,status){
 			alert("Data: " + data + "\nStatus: " + status);
 		});*/
-		var signedRequest;
 		FB.getLoginStatus(function(response) {
-			console.log(response);
 			if (response.status === 'connected') {
 				// connected
-				signedRequest = response.authResponse.signedRequest;
+				var signedRequest = response.authResponse.signedRequest;
+				getUserInfo(signedRequest);
 			} else {
 				// not_logged_in or not_authorized
 				// open login popup
 				//window.location = "https://www.facebook.com/dialog/oauth?client_id=111454652362194&redirect_uri=<?php echo Yii::app()->getBaseUrl(true); ?>&response_type=token&scope=email,user_likes";
 				FB.login(function(response) {
-					console.log(response);
+					console.log("logging response:");
 					if (response.authResponse) {
+						console.log(response);
 						// connected
-						signedRequest = response.authResponse.signedRequest;
+						var signedRequest = response.authResponse.signedRequest;
+						getUserInfo(signedRequest);
 					} else {
-						console.log("annnnder");
 						// cancelled
 						return;
 					}
-				} , {scope: 'email,user_likes'});
+				} , {scope: 'email,user_likes,user_birthday,user_hometown,user_website'});
 			}
-			
-				console.log(signedRequest);
-				$.post("fb-login.php",
-				{
-					signed_request: signedRequest
-				},
-				function(data,status){
-					alert("Data: " + data + "\nStatus: " + status);
-				});
-			
+
+		});
+	}
+
+	function getUserInfo(signedRequest){
+		$.ajax({
+				url : "<?php echo $this->createUrl("/facebook/index"); ?>",
+				data : {signed_request: signedRequest},
+				dataType : "json",
+				type : "post",
+				success: function(data){
+					console.log("loggin status:");
+					console.log(data);
+					if(typeof data.status !== "undefined"){
+						if(data.status == "fail"){
+							$("#reply_message").html("error occurred while logging you in.");		
+						}
+						else if(data.status == "ok"){
+							$("#current-user").html("Welcome, " + data.name);
+							$("#authenticated-menu").show();
+							$("#guest-menu").hide();
+							$("#login-page, #register-page").slideUp("fast", function(){
+								$(this).remove();
+							});
+						}
+					}
+				}
 		});
 	}
   

@@ -1,6 +1,6 @@
 <?php
-/* @var $this ConfigController */
-/* @var $model Config */
+/* @var $this SettingController */
+/* @var $model Setting */
 /* @var $form CActiveForm */
 ?>
 
@@ -14,6 +14,11 @@
 	<div class="row">
 		<?php echo $form->label($model,'id'); ?>
 		<?php echo $form->textField($model,'id',array('size'=>10,'maxlength'=>10)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'category'); ?>
+		<?php echo $form->textField($model,'category',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">

@@ -1,6 +1,6 @@
 <?php
 
-class ConfigController extends Controller
+class SettingController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -37,7 +37,7 @@ class ConfigController extends Controller
 			),*/
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index', 'view', 'create', 'update', 'admin','delete'),
-				'users'=>array('admin'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -62,16 +62,18 @@ class ConfigController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Config;
+		$model=new Setting;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Config']))
+		if(isset($_POST['Setting']))
 		{
-			$model->attributes=$_POST['Config'];
-			if($model->save())
+			$model->attributes=$_POST['Setting'];
+			if($model->save()){
+				Yii::app()->setting->set($model->key, $model->value, $model->category);
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -91,11 +93,13 @@ class ConfigController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Config']))
+		if(isset($_POST['Setting']))
 		{
-			$model->attributes=$_POST['Config'];
-			if($model->save())
+			$model->attributes=$_POST['Setting'];
+			if($model->save()){
+				Yii::app()->setting->set($model->key, $model->value, $model->category);
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
@@ -110,8 +114,9 @@ class ConfigController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
-
+		$model = $this->loadModel($id);
+		Yii::app()->setting->delete($model->key, $model->category);
+		$model->delete();
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
@@ -122,7 +127,7 @@ class ConfigController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Config');
+		$dataProvider=new CActiveDataProvider('Setting');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +138,10 @@ class ConfigController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Config('search');
+		$model=new Setting('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Config']))
-			$model->attributes=$_GET['Config'];
+		if(isset($_GET['Setting']))
+			$model->attributes=$_GET['Setting'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,24 +152,25 @@ class ConfigController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Config the loaded model
+	 * @return Setting the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Config::model()->findByPk($id);
+		$model=Setting::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
+		$model->value = Yii::app()->setting->get($model->key);
 		return $model;
 	}
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Config $model the model to be validated
+	 * @param Setting $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='config-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='setting-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
