@@ -9,7 +9,7 @@
                   
 
 		<div class="sixteen columns" >
-            <?php $this->renderPartial("_program", array("programs" => $programs)); ?>
+            <?php $this->renderPartial("_program", array("programType" => "shows" , "programs" => $programs)); ?>
 			<div class="stage">
 			</div>  
 		</div>

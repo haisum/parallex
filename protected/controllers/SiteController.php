@@ -30,6 +30,7 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		$this->layout = "//layouts/columnParallax";
 		$model = new ProgramDetail;
+		$settings = SettingDetail::getSettingVars();
 		$programs = array(
 			"music" => $model->getPrograms(Yii::app()->params["app"]["programTypes"]["music"]),
 			"drama" => $model->getPrograms(Yii::app()->params["app"]["programTypes"]["drama"]),
@@ -41,15 +42,17 @@ class SiteController extends Controller
 				"music" => $this->renderPartial("static/music", $programs["music"], true),
 				"drama" => $this->renderPartial("static/drama", $programs["drama"], true),
 				"shows" => $this->renderPartial("static/shows", $programs["shows"], true),
-				"schedule" => $this->renderPartial("static/schedule", null, true),
-				"live" => $this->renderPartial("static/live", null, true),
-				"mobile" => $this->renderPartial("static/mobile", null, true)
+				"schedule" => $this->renderPartial("static/schedule", $programs, true),
+				"live" => $this->renderPartial("static/live", $settings, true),
+				"mobile" => $this->renderPartial("static/mobile", $settings, true)
 			),
 			"pages" => array(
 				"home"  => $this->renderPartial("pages/home", null, true),
 				"login" => $this->renderPartial("pages/login", null, true),
 				"register" => $this->renderPartial("pages/register", null, true)
-			)
+			),
+			'programs' => $programs,
+			'settings' => $settings
 		);
 
 		$this->render('index', $data);

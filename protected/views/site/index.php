@@ -46,20 +46,32 @@ Note: Don't edit main frame, except comment area
                 <li><a href="#home">Home</a></li> 
                 <li><a href="#music">Music</a>
 					<!-- Sub menu -->
+					<?php if(count($programs["music"]["programs"]) > 0){ ?>
                 	<ul>
-                		<li><a> Song 01</a></li>
+                		<?php foreach($programs["music"]["programs"] as $program){ ?>
+                			<li><a href="javascript:;" onclick="$('#music_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
+                		<?php } ?>
                 	</ul>
+                	<?php } ?>
                 <li><a href="#drama">Drama Series</a> 
                 	<!-- Sub menu -->
+                	<?php if(count($programs["drama"]["programs"]) > 0){ ?>
                 	<ul>
-                		<li><a> Series 01</a></li>
+                		<?php foreach($programs["drama"]["programs"] as $program){ ?>
+                			<li><a href="javascript:;" onclick="$('#drama_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
+                		<?php } ?>
                 	</ul>
+                	<?php } ?>
                 </li>
                 <li><a href="#shows">Shows</a>
                 	<!-- Sub menu -->
+                	<?php if(count($programs["shows"]["programs"]) > 0){ ?>
                 	<ul>
-                		<li><a href="#shows-show01">Show 01</a></li>
+                		<?php foreach($programs["shows"]["programs"] as $program){ ?>
+                			<li><a href="javascript:;" onclick="$('#shows_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
+                		<?php } ?>
                 	</ul>
+                	<?php } ?>
                 </li>
                     
                 <li><a href="#schedule">Schedule</a></li>
@@ -134,19 +146,19 @@ Note: Don't edit main frame, except comment area
 <div class="footer"  >
 	<div class="container" > 
 		<!-- Place your copyright text -->
-		<div class="five columns"><h6 class="bottomText">Copyright 2013 © NEX1 TV All rights reserved.</h6></div>
+		<div class="five columns"><h6 class="bottomText">Copyright <?php echo date('Y'); ?> © NEX1 TV All rights reserved.</h6></div>
 		<!-- Address -->
 		<div class="three columns"><h6 class="bottomText"></h6></div>
 		<!-- Email -->
 		<div class="three columns"><h6 class="bottomText"><span class="list2_white">support@nex1.tv</span></h6></div>   
 		<!-- Social network web page link  -->
-		<div class="four  columns offset-by-one" >
+		<div class="four  columns offset-by-one">
 			<ul class="social_bookmarks noMargin">                 
-				<li class="twitter_white noMargin"><a >Follow us on Twitter</a></li>
-				<li class="facebook_white noMargin"><a >Join our Facebook Group</a></li>
-				<li class="gplus_white noMargin"><a >Join me on Google Plus</a></li>
-				<li class="linkedin_white noMargin"><a >Add me on Linkedin</a></li>
-				<li class="rss_white noMargin"><a >RSS</a></li>
+				<li class="twitter_white noMargin"><a href="<?php echo $settings["twitterProfile"]; ?>">Follow us on Twitter</a></li>
+				<li class="facebook_white noMargin"><a href="<?php echo $settings["facebookProfile"]; ?>">Join our Facebook Group</a></li>
+				<li class="gplus_white noMargin"><a href="<?php echo $settings["googlePlusProfile"]; ?>">Join me on Google Plus</a></li>
+				<li class="linkedin_white noMargin"><a href="<?php echo $settings["linkedinProfile"]; ?>">Add me on Linkedin</a></li>
+				<li class="rss_white noMargin"><a href="<?php echo $settings["rssFeedUrl"]; ?>">RSS</a></li>
 			</ul>
 		</div> 
 	</div>

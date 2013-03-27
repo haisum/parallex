@@ -18,7 +18,7 @@
                     
             	<div class="fifteen columns proPadLef alpha" >
             	<!-- Add video -->
-					<div class="addVideo video_content "  id="video" data-url="http://www.youtube.com/watch?v=sszS-vb3dgE&list=UU9DhQ5rlwDAvQBt0YkP7KGA&index" > 
+					<div class="addVideo video_content "  id="video" data-url="<?php echo $liveStreamUrl; ?>" > 
 						<div class="video_hover"></div>
 						<img class="scale-with-grid" src="images/video_img1.jpg" />
 					</div> 

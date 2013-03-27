@@ -170,4 +170,26 @@ $(function(){
 			}, 1500);
 		}
 	);
+
+	$(document).on("click", ".likes,.dislikes", function(e){
+		var current = parseInt($(this).find("span").text());
+		dataObj = {
+			type : $(this).is(".likes") ? "like" : "dislike",
+			id : $(this).data("id")
+		};
+		$this = $(this);
+		$.ajax({
+			url : 'program/like',
+			data : dataObj,
+			type : 'post',
+			dataType : 'json',
+			success : function(data){
+				if(data.status === "ok"){
+					$this.find("span").fadeOut("slow", function(){
+						$(this).text(data.newCount).css("font-weight", "bold").fadeIn();
+					});
+				}
+			}
+		})
+	});
 });

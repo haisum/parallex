@@ -4,7 +4,7 @@
         <div class="separator_mini"></div> 
         <h1>Drama</h1>
 		<div class="sixteen columns" >
-            <?php $this->renderPartial("_program", array("programs" => $programs)); ?>
+            <?php $this->renderPartial("_program", array("programType" => "drama" ,"programs" => $programs)); ?>
 			<div class="stage">
 			</div>
 		</div>

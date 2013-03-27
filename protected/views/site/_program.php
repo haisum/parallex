@@ -1,7 +1,7 @@
 <?php if($programs){ ?>
 	<?php foreach($programs as $program){ ?>
 	<!-- program  -->
-	<div class="program" itemscope itemtype="http://schema.org/MusicVideoObject">
+	<div id="<?php echo "{$programType}_{$program['id']}"; ?>" class="program" itemscope itemtype="http://schema.org/MusicVideoObject">
     	
         <img  src="<?php echo $program["image"]; ?>" class="thumbnail" alt="Wonder" itemprop="image"/>
              
@@ -28,10 +28,10 @@
 					</object>
 					</div> -->
 					
-					<a class=" list_hover"><span class="list10"><?php echo $program["likes"]; ?></span></a>
-					<a class=" list_hover"><span class="list11"><?php echo $program["dislikes"]; ?></span></a>
+					<a data-id="<?php echo $program["id"]; ?>" class="likes list_hover"><span <?php if(Yii::app()->request->cookies["c_like_" . $program["id"]] === "like") { ?> style="font-weight:bold;"<?php } ?> class="list10"><?php echo $program["likes"]; ?></span></a>
+					<a data-id="<?php echo $program["id"]; ?>" class="dislikes list_hover"><span <?php if(Yii::app()->request->cookies["c_like_" . $program["id"]] === "dislike") { ?> style="font-weight:bold;"<?php } ?> class="list11"><?php echo $program["dislikes"]; ?></span></a>
                 	<div class="social-media-sharing">
-						<a class="fb-share" target="_blank" href="https://www.facebook.com/dialog/feed?app_id=111454652362194&link=https://developers.facebook.com/docs/reference/dialogs/&picture=http://www.tradebanq.com/images/logo_en.png&name=Nex1TV&caption=Game%20of%20Thrones&description=Episode%201&redirect_uri=http://localhost/nex1tv&display=popup"> </a>
+						<a class="fb-share" target="_blank" href="https://www.facebook.com/dialog/feed?app_id=<?php echo Yii::app()->setting->get("facebook-app-id"); ?>&link=https://developers.facebook.com/docs/reference/dialogs/&picture=http://www.tradebanq.com/images/logo_en.png&name=Nex1TV&caption=Game%20of%20Thrones&description=Episode%201&redirect_uri=http://localhost/nex1tv&display=popup"> </a>
 						<!--<a href="https://plus.google.com/share?url=http://hkhalili.com" onclick="javascript:window.open(this.href,
 						'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
 						src="https://www.gstatic.com/images/icons/gplus-64.png" alt="Share on Google+"/></a>

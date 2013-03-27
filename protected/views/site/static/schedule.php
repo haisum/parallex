@@ -25,50 +25,44 @@
                                                     
 			  <!-- Tab Content -->
 			  <ul class="tabs-content">
-			    <li id="skill" > 
+			    <li id="skill" class="active" > 
+			    	<?php if($music["programs"]){
+			    		foreach($music["programs"] as $program){
+			    	 ?>
                         <div class="row alpha ">
-                        	<span class="smallImg " > <img class="border1" src="images/team_img1.jpg" alt="Wonder" /></span>                
-                        	<h5 class="title title_bottomspace">Program 1</h5>
-                        	consectetur adipiscing elit ligula.  Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+                        	<span class="smallImg " > <img style="width:80px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>                
+                        	<h5 class="title title_bottomspace"><?php echo $program["name"]; ?></h5>
+                        	<?php echo $program["timing"]; ?>
                         </div>
-                        
                         <div class="separator_mini"></div>
-                                                                                            
-                        <div class="row alpha ">
-                        	<span class="smallImg " ><img class="border1" src="images/team_img2.jpg" alt="Wonder" /></span>
-                        	<h5 class="title title_bottomspace">Program 2</h5>
-                        	Maecenas sed justo varius sed justo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy 
-                        </div> 
+                    <?php }
+                    } ?>
 					</li>
 				<li id="staff" > 
+                        <?php if($drama["programs"]){
+			    		foreach($drama["programs"] as $program){
+			    	 ?>
                         <div class="row alpha ">
-                        	<span class="smallImg " > <img class="border1" src="images/team_img1.jpg" alt="Wonder" /></span>                
-                        	<h5 class="title title_bottomspace">Program 1</h5>
-                        	consectetur adipiscing elit ligula.  Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+                        	<span class="smallImg " > <img style="width:80px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>
+                        	<h5 class="title title_bottomspace"><?php echo $program["name"]; ?></h5>
+                        	<?php echo $program["timing"]; ?>
                         </div>
-                        
                         <div class="separator_mini"></div>
-                                                                                            
-                        <div class="row alpha ">
-                        	<span class="smallImg " ><img class="border1" src="images/team_img2.jpg" alt="Wonder" /></span>
-                        	<h5 class="title title_bottomspace">Program 2</h5>
-                        	Maecenas sed justo varius sed justo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy 
-                        </div> 
+                    <?php }
+                    } ?>
 					</li>
 					<li id="strategy" > 
-                        <div class="row alpha ">
-                        	<span class="smallImg " > <img class="border1" src="images/team_img1.jpg" alt="Wonder" /></span>                
-                        	<h5 class="title title_bottomspace">Program 1</h5>
-                        	consectetur adipiscing elit ligula.  Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-                        </div>
-                        
-                        <div class="separator_mini"></div>
-                                                                                            
-                        <div class="row alpha ">
-                        	<span class="smallImg " ><img class="border1" src="images/team_img2.jpg" alt="Wonder" /></span>
-                        	<h5 class="title title_bottomspace">Program 2</h5>
-                        	Maecenas sed justo varius sed justo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy 
-                        </div> 
+                        <?php if($shows["programs"]){
+			    		foreach($shows["programs"] as $program){
+				    	 ?>
+	                        <div class="row alpha ">
+	                        	<span class="smallImg " > <img style="width:80px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>                
+	                        	<h5 class="title title_bottomspace"><?php echo $program["name"]; ?></h5>
+	                        	<?php echo $program["timing"]; ?>
+	                        </div>
+	                        <div class="separator_mini"></div>
+	                    <?php }
+	                    } ?>
 					</li>
 		    </ul>
 			  <p>&nbsp;</p>
