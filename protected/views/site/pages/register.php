@@ -9,15 +9,21 @@
 		
 		<form action="javascript:;" id="register-form" name="register" method="post" class="darkColor ten columns">
 			First name<input type="text" name="User[firstName]"  placeholder="First Name" />
+			<span style="color:red;display:block;" id="User_firstName"></span>
 			Last name<input type="text" name="User[lastName]"  placeholder="Last Name" />
+			<span style="color:red;display:block;" id="User_lastName"></span>
 			Email<input type="text" name="User[email]" placeholder="Email" />
+			<span style="color:red;display:block;" id="User_email"></span>
 			Birthday <br/>
-				<input type="date" name="User[birthday]" placeholder="birthday" />
-			<br/><br/>
-			Location <input type="text" name="User[address]"  placeholder="Address" />
+				<input type="date" name="User[birthday]" placeholder="birthday in yyyy-mm-dd format" />
+				<span style="color:red;display:block;" id="User_birthday"></span>
+			Address <input type="text" name="User[address]"  placeholder="Address" />
+			<span style="color:red;display:block;" id="User_address"></span>
 
-			Location <input type="text" name="User[website]"  placeholder="Website" />
+			Website <input type="text" name="User[website]"  placeholder="Website" />
+			<span style="color:red;display:block;" id="User_website"></span>
 			Password: <input type="password" name="User[password]" />
+			<span style="color:red;display:block;" id="User_password"></span>
 			<br/>                                
 			<button type="submit" id="register_submit"  class="button alignLeft">Register</button>                                  
 			<div id="reply_register_message" ></div>                            
@@ -26,6 +32,7 @@
 	$(document).ready(function(){
 		$("#register-form").submit(function(){
 			$("#reply_register_message").html("");
+			$this = $(this);
 			$.ajax({
 				url : "site/register",
 				type : "post",
@@ -34,11 +41,9 @@
 				success : function(data){
 					if(typeof data.status !== "undefined"){
 						if(data.status == "fail"){
-							var message = "<strong>Following errors occured:</strong><br style='clear:both;'/><ul style='list-style: disc;margin-left: 30px;'>";
 							$.each(data.response, function(i, e){
-								message += "<li>"+e[0]+"</li>";
+								$this.find("#" + i).text(e[0]);
 							});
-							$("#reply_register_message").html(message + "</ul>");
 						}
 						else if(data.status == "ok"){
 							$("#reply_register_message").html("Registeration successfull. You may now login.");	
@@ -47,7 +52,6 @@
 							}, 3000);
 						}
 					}
-					console.log(data);
 				}
 			});
 			return false;

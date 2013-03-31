@@ -4,7 +4,31 @@ class ProgramController extends Controller
 {
 	public function actionComment()
 	{
-		$this->render('comment');
+		if(isset($_POST["Comment"])){
+			$comment = new Comment;
+			$comment->attributes = $_POST["Comment"];
+			$comment->postedTime = date("Y-m-d H:i:s", time());
+			$response = CActiveForm::validate($comment);
+			$message = array(
+				'status' => 'fail',
+				'comment' => ''
+			);
+			$message["response"] = json_decode($response);
+			if(empty($message["response"])){
+				$comment->comment = CHtml::encode($comment->comment);
+				$comment->website = CHtml::encode($comment->website);
+				$comment->name = CHtml::encode($comment->name);
+				$comment->email = CHtml::encode($comment->email);
+				$comment->save(false);
+				$comment->postedTime = date("F jS, Y", strtotime($comment->postedTime));
+				$message["comment"] = $this->renderPartial("//site/_comment", array("comment" => $comment), true);
+				$message["status"] = "ok";
+			}
+			echo json_encode($message);
+		}
+		else{
+			throw new CHttpException("403", "Bad Request");
+		}
 	}
 
 	public function actionLike()

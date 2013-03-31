@@ -53,13 +53,8 @@ class ProgramDetail extends Program
 			$temp["timing"] = date("l, h:i A", strtotime($program->timing));
 			$tempComments = array();
 			foreach($program->comments as $comment){
-				$tempComments[] = array(
-					"name" => $comment->name,
-					"website" => $comment->website,
-					"email" => $comment->email,
-					"timing" => date("F jS, Y", strtotime($comment->postedTime)),
-					"comment" => $comment->comment
-				);
+				$comment->postedTime = date("F jS, Y", strtotime($comment->postedTime));
+				$tempComments[] = $comment;
 			}
 			$temp["comments"] = $tempComments;
 			$tempPrograms[] = $temp;

@@ -53,68 +53,46 @@
 					<!--<div class="fourteen columns alpha">-->
 					<div>
 					<div class="mobile_spacing">
-						<?php if($program["comments"]){?>
 						<section id="comments-sec">
 							<!-- Number of comments posted-->
 							<h5 class="title_light">Comments (<?php echo count($program["comments"]);?>)</h5>
 							
-							<ol class="comment-list">
+							<ol class="comment-list" id="commentList<?php echo $program["id"]; ?>">
 							<?php	
+							if($program["comments"]){
 								foreach($program["comments"] as $comment){
-							?>
-								<li class="comment">
-									<article> 
-										<!-- author -->
-										<?php
-										$this->widget('application.extensions.VGGravatarWidget', 
-	                                        array(
-	                                            'email' =>  $comment["email"],
-	                                            'size' => 50,
-	                                            'htmlOptions' => array(
-	                                            	"class" => "avatar",
-	                                            	"alt" => "Profile Picture"
-	                                            )
-	                                        )
-                                        ); 
-                                        ?>
-										<div class="comment-aut">
-											<a class="author text_hover"><?php echo $comment["name"]; ?></a>
-											<p class="date"><?php echo $comment["timing"]; ?></p>
-										</div>
-										<!-- author comment -->
-										<div class="comment-area">
-											<p><?php echo $comment["comment"]; ?></p>
-										</div>
-									</article>
-								</li>
-							<?php } ?>	  
+									$this->renderPartial("_comment", array("comment" => $comment));
+								}
+							}
+							?>	  
 							</ol>
 						</section>
-						<?php
-						}
-						?>
 						<section class="lightColor" id="comment-replay">
 							<h5>Leave a Comment</h5>
 							<!-- Add comment Form field -->
-							<form class="comments-form" method="post">
+							<form class="comments-form" onsubmit="submitComment(this);" action="javascript:;" data-id="<?php echo $program["id"]; ?>" method="post">
 									
 								<label for="comment-name"><h6><strong>Name</strong> (required)</h6></label>
-								<input type="text" id="comment-name" value="" name="name">
+								<input type="text" id="comment-name" value="" name="Comment[name]">
+								<span style="color:red;" id="Comment_name_<?php echo $program["id"]; ?>"></span>
 								<br>
 								   
 								<label for="comment-email"><h6><strong>Email</strong> (required)</h6></label>
-								<input type="email" id="comment-email" value="" name="email">
+								<input type="email" id="comment-email" value="" name="Comment[email]">
+								<span style="color:red;" id="Comment_email_<?php echo $program["id"]; ?>"></span>
 								<br>
 								   
 								<label for="comment-url"><h6><strong>Website</strong></h6></label>
-								<input type="url" id="comment-url" value="" name="url">
+								<input type="url" id="comment-url" value="" name="Comment[website]">
+								<span style="color:red;" id="Comment_website_<?php echo $program["id"]; ?>"></span>
 								<br>
 								   
 								<label for="comment-message"><h6><strong>Your Comment</strong> (required)</h6></label>
-								<textarea required="" rows="6" cols="88" id="comment-message" name="message"></textarea>
+								<textarea required="" rows="6" cols="88" id="comment-message" name="Comment[comment]"></textarea>
+								<span style="color:red;" id="Comment_comment_<?php echo $program["id"]; ?>"></span>
 								<br>
-								<input type="hidden" value="<?php $program["id"]; ?>" name="program-id"/>
-								<a href="#" class="alignRight"><span class="button">Submit</span></a>
+								<input type="hidden" value="<?php echo $program["id"]; ?>" name="Comment[programId]"/>
+								<a onclick="submitComment($(this).parent('form'));" href="javascript:;" class="alignRight"><span class="button">Submit</span></a>
 					
 								<div class="clear"></div>
 					

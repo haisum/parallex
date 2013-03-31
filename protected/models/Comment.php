@@ -42,6 +42,9 @@ class Comment extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('programId, name, email, comment, postedTime', 'required'),
+			array('email', 'email'),
+			array('website', 'url'),
+			array('comment' , 'length', 'min'=>15),
 			array('programId, status', 'numerical', 'integerOnly'=>true),
 			array('name, website', 'length', 'max'=>50),
 			array('email', 'length', 'max'=>60),

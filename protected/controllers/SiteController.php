@@ -158,6 +158,11 @@ class SiteController extends Controller
 			$response = CActiveForm::validate($user);
 			$message["response"] = json_decode($response);
 			if(empty($message["response"])){
+				$user->firstName = CHtml::encode($user->firstName);
+				$user->website = CHtml::encode($user->website);
+				$user->email = CHtml::encode($user->email);
+				$user->lastName = CHtml::encode($user->lastName);
+				$user->address = CHtml::encode($user->address);
 				$user->save(false);
 				$message["status"] = "ok";
 			}

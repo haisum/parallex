@@ -193,3 +193,32 @@ $(function(){
 		})
 	});
 });
+
+function submitComment(form){
+	var $form = $(form);
+	var id = $form.data("id");
+	var formData = $form.serialize();
+	$.ajax({
+		url : "program/comment",
+		data: formData,
+		type : "post",
+		dataType : "json",
+		success : function(data){
+			console.log(data);
+			if(data.status === "ok"){
+				$form.parent().prev().children(".comment-list").append(data.comment);
+				$("document, body").animate({
+					scrollTop : $form.parent().prev().find("li:last").offset().top
+				});
+				$form.parent().slideUp("slow", function(){
+					$(this).remove();
+				});
+			}
+			else if(data.status === "fail"){
+				$.each(data.response , function(i, e){
+					$form.find("#" + i + "_" + id).text(e[0]);
+				});
+			}
+		}
+	});
+}

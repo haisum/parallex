@@ -80,11 +80,11 @@ class FacebookController extends Controller
 			$user = null;
 			if(count($users) == 0){
 				$user = new User;
-				$user->firstName = $fbUser->first_name;
-				$user->lastName = $fbUser->last_name;
-				$user->website = isset($fbUser->website) ? $fbUser->website : $fbUser->link;
-				$user->address = $fbUser->hometown->name;
-				$user->email = $fbUser->email;
+				$user->firstName = CHtml::encode($fbUser->first_name);
+				$user->lastName = CHtml::encode($fbUser->last_name);
+				$user->website = isset($fbUser->website) ? CHtml::encode($fbUser->website) : CHtml::encode($fbUser->link);
+				$user->address = CHtml::encode($fbUser->hometown->name);
+				$user->email = CHtml::encode($fbUser->email);
 				$user->birthday = date("Y-m-d H:i:s" ,strtotime($fbUser->birthday));
 				$user->password = time() . rand();
 				$user->lastLogin = date("Y-m-d H:i:s" , time());
