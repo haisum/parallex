@@ -56,7 +56,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'url',
 		array(
 			'name' => 'timing',
-			'value' => 'date("l, h:i A", strtotime($data->timing))'
+			'value' => 'date("l, h:i A", strtotime($data->timing))',
+			'filter' => false
 		),
 		array(
 			'name' => 'type',
