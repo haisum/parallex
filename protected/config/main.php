@@ -21,12 +21,12 @@ return array(
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		
-		'gii'=>array(
+		/*'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'qwerty',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
-		),
+		),*/
         'admin',	
 	),
 
@@ -69,8 +69,8 @@ return array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
-					'class'=>'CWebLogRoute',
-					'levels'=>'error, warning, trace, info',
+					'class'=>'CFileLogRoute',
+					'levels'=>'error',
 				),
 				// uncomment the following to show log messages on web pages
 				/*
@@ -90,7 +90,7 @@ return array(
 	        'cacheTime'         => 84000,
 	        'tableName'     	=> 'setting',
 	        'dbComponentId'     => 'db',
-	        'createTable'       => true,
+	        'createTable'       => false,
 	        'dbEngine'      	=> 'InnoDB',
         ),
 	),
