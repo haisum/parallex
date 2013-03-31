@@ -21,14 +21,25 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'name',
 		'url',
 		'description',
-		'imageId',
-		'timing',
-		'status',
-		'type',
+		array(
+		'name'	=> 'imageId',
+		'value' => $model->image->title
+		),
+		array(
+			'name' => 'timing',
+			'value' => date("l, h:i A", strtotime($program->timing))
+		),
+		array(
+		 'name' => 'status',
+		 'value' => Yii::app()->params["app"]["programStatusArray"][$model->status],
+		),
+		array(
+		 'name' => 'type',
+		 'value' => Yii::app()->params["app"]["programTypesArray"][$model->type],
+		),
 		'upVotes',
 		'downVotes',
 	),

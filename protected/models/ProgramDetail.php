@@ -51,6 +51,7 @@ class ProgramDetail extends Program
 			$temp["url"] = $program->url;
 			$temp["image"] = $program->image->path;
 			$temp["timing"] = date("l, h:i A", strtotime($program->timing));
+			$temp["timingDXB"] = date("l, h:i A", strtotime($program->timing . " +4 hours"));
 			$tempComments = array();
 			foreach($program->comments as $comment){
 				$comment->postedTime = date("F jS, Y", strtotime($comment->postedTime));

@@ -30,9 +30,10 @@
 			    		foreach($music["programs"] as $program){
 			    	 ?>
                         <div class="row alpha ">
-                        	<span class="smallImg " > <img style="width:80px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>                
+                        	<span class="smallImg " > <img style="width:80px;min-height:50px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>                
                         	<h5 class="title title_bottomspace"><?php echo $program["name"]; ?></h5>
-                        	<?php echo $program["timing"]; ?>
+                        	<?php echo $program["timing"]; ?> GMT<br/>
+                        	<?php echo $program["timingDXB"]; ?> DXB
                         </div>
                         <div class="separator_mini"></div>
                     <?php }
@@ -43,9 +44,10 @@
 			    		foreach($drama["programs"] as $program){
 			    	 ?>
                         <div class="row alpha ">
-                        	<span class="smallImg " > <img style="width:80px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>
+                        	<span class="smallImg " > <img style="width:80px;min-height:50px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>
                         	<h5 class="title title_bottomspace"><?php echo $program["name"]; ?></h5>
-                        	<?php echo $program["timing"]; ?>
+                        	<?php echo $program["timing"]; ?> GMT<br/>
+                        	<?php echo $program["timingDXB"]; ?> DXB
                         </div>
                         <div class="separator_mini"></div>
                     <?php }
@@ -56,9 +58,10 @@
 			    		foreach($shows["programs"] as $program){
 				    	 ?>
 	                        <div class="row alpha ">
-	                        	<span class="smallImg " > <img style="width:80px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>                
+	                        	<span class="smallImg " > <img style="width:80px;min-height:50px;" class="border1" src="<?php echo $program["image"]; ?>" alt="<?php echo $program["name"]; ?>" /></span>                
 	                        	<h5 class="title title_bottomspace"><?php echo $program["name"]; ?></h5>
-	                        	<?php echo $program["timing"]; ?>
+	                        	<?php echo $program["timing"]; ?> GMT<br/>
+                        		<?php echo $program["timingDXB"]; ?> DXB
 	                        </div>
 	                        <div class="separator_mini"></div>
 	                    <?php }

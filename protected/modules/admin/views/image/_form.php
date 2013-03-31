@@ -9,6 +9,9 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'image-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array(
+		'enctype' => 'multipart/form-data'
+	)
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -23,31 +26,31 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'path'); ?>
-		<?php echo $form->textArea($model,'path',array('rows'=>6, 'cols'=>50)); ?>
+		<?php if(!$model->isNewRecord){ ?>
+		<?php echo CHtml::image(Yii::app()->baseUrl. "/" . $model->path, "thumbnail") . '<br/>'; ?>
+		<?php } ?>
+		<?php echo $form->fileField($model, 'uploadedImage'); ?>
 		<?php echo $form->error($model,'path'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textField($model,'type',array('size'=>4,'maxlength'=>4)); ?>
-		<?php echo $form->error($model,'type'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'position'); ?>
-		<?php echo $form->textField($model,'position',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'position'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'itemId'); ?>
-		<?php echo $form->textField($model,'itemId',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'itemId'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'lastModified'); ?>
-		<?php echo $form->textField($model,'lastModified'); ?>
+		<?php Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
+            $this->widget('CJuiDateTimePicker',array(
+                'model'=>$model, //Model object
+                'attribute'=>'lastModified', //attribute name
+                'mode'=>'datetime', //use "time","date" or "datetime" (default)
+                'options' => array(
+                	'dateFormat' => 'yy-mm-dd',
+                	'timeFormat' => 'hh:mm:00'
+                ),
+                'language' => '',
+                'htmlOptions' => array(
+                	"readonly" => "readonly"
+                )
+            ));
+        ?>
 		<?php echo $form->error($model,'lastModified'); ?>
 	</div>
 

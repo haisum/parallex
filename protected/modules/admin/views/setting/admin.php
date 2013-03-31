@@ -43,14 +43,21 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'setting-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
-		'id',
-		'category',
 		'key',
-		'value',
+		array(
+			'name' => 'value',
+			'value' => '$data->category != "slider" ? Yii::app()->setting->get($data->key, $data->category) : "HTML"'
+		),
+		'category',
 		array(
 			'class'=>'CButtonColumn',
+			'buttons' => array(
+				'delete' => array(
+					'label' => 'delete',
+					'visible' => '$data->category == "slider"'
+				)
+			)
 		),
 	),
 )); ?>

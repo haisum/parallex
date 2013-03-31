@@ -21,13 +21,21 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
-		'programId',
+		array(
+			'name' => 'programId',
+			'value' => $model->program->name
+		),
 		'name',
 		'email',
 		'website',
 		'comment',
-		'postedTime',
-		'status',
+		array(
+			'name' => 'postedTime',
+			'value' => date("F jS, Y", strtotime($model->postedTime))
+		),
+		array(
+			'name' => 'status',
+			'value' => Yii::app()->params["app"]["commentStatusArray"][$model->status]
+		),
 	),
 )); ?>

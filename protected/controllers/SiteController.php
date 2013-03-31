@@ -47,7 +47,7 @@ class SiteController extends Controller
 				"mobile" => $this->renderPartial("static/mobile", $settings, true)
 			),
 			"pages" => array(
-				"home"  => $this->renderPartial("pages/home", null, true),
+				"home"  => $this->renderPartial("pages/home", array('slides' => Yii::app()->setting->get('', 'slider')), true),
 				"login" => $this->renderPartial("pages/login", null, true),
 				"register" => $this->renderPartial("pages/register", null, true)
 			),

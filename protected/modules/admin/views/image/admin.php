@@ -45,12 +45,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
+		array(
+			'name' => 'path',
+			'filter' => false,
+			'type' => 'raw',
+			'value' => 'CHtml::image(Yii::app()->baseUrl. "/" . $data->path, "thumbnail", array("style" => "width:100px;"))',
+			'header' => 'Image'
+		),
 		'title',
-		'path',
-		'type',
-		'position',
-		'itemId',
 		/*
 		'lastModified',
 		*/

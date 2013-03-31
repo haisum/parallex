@@ -47,6 +47,7 @@ class User extends CActiveRecord
 			array('firstName, lastName, email, address, password, birthday', 'required'),
 			array('email', 'email'),
 			array('email', 'unique'),
+			array('website', 'url'),
 			array('birthday', 'date', 'format' => 'yyyy-MM-dd'),
 			array('birthday' , 'compare', 'operator'=>'>','compareValue' => '1930-01-01'),
 			array('birthday' , 'compare', 'operator'=>'<','compareValue' => '2010-01-01'),

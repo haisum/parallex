@@ -62,7 +62,7 @@ class ImageController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Image;
+		$model=new Image('create');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -70,8 +70,16 @@ class ImageController extends Controller
 		if(isset($_POST['Image']))
 		{
 			$model->attributes=$_POST['Image'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->path = 'test path';
+			if($model->validate()){
+				$file = CUploadedFile::getInstance($model, 'uploadedImage');
+				$path = 'images/programImages/' . time() . rand() . '.' . $file->extensionName;
+				$file->saveAs($path);
+				$model->path = $path;
+				if($model->save(false)){
+					$this->redirect(array('view','id'=>$model->id));
+				}
+			}
 		}
 
 		$this->render('create',array(
@@ -94,8 +102,12 @@ class ImageController extends Controller
 		if(isset($_POST['Image']))
 		{
 			$model->attributes=$_POST['Image'];
-			if($model->save())
+			if($model->save()){
+				if(($file = CUploadedFile::getInstance($model, 'uploadedImage')) !== null){
+					$file->saveAs($model->path);
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(

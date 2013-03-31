@@ -17,7 +17,11 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'category'); ?>
-		<?php echo $form->textField($model,'category',array('size'=>60,'maxlength'=>255)); ?>
+		<?php if($model->isNewRecord || $model->category == 'slider'){ ?>
+		<?php echo $form->dropDownList($model,'category', array('system' => 'system', 'slider'=>slider)); ?>
+		<?php } else{ ?>
+			<?php echo $model->category; ?>
+		<?php } ?>
 		<?php echo $form->error($model,'category'); ?>
 	</div>
 
@@ -29,7 +33,15 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'value'); ?>
+		<?php if( $model->category == "slider"){ ?>
+		<?php
+			$this->widget('application.extensions.editMe.widgets.ExtEditMe', array(
+			    'model'=>$model,
+			    'attribute'=>'value',
+			));
+		 }  else {?>
 		<?php echo $form->textField($model,'value',array('size'=>60,'maxlength'=>255)); ?>
+		<?php } ?>
 		<?php echo $form->error($model,'value'); ?>
 	</div>
 

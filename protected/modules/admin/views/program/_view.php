@@ -21,21 +21,22 @@
 	<?php echo CHtml::encode($data->description); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('imageId')); ?>:</b>
-	<?php echo CHtml::encode($data->imageId); ?>
+	<b style="vertical-align:top;"><?php echo CHtml::encode($data->getAttributeLabel('imageId')); ?>:</b>
+	<img src="<?php echo Yii::app()->baseUrl . '/' . $data->image->path; ?>" alt="thumbnail"/>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('timing')); ?>:</b>
-	<?php echo CHtml::encode($data->timing); ?>
+	<?php echo date("l, h:i A", strtotime($data->timing)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('status')); ?>:</b>
-	<?php echo CHtml::encode($data->status); ?>
-	<br />
-
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('type')); ?>:</b>
-	<?php echo CHtml::encode($data->type); ?>
+	<?php echo Yii::app()->params["app"]["programTypesArray"][$data->type]; ?>
+	<br />
+
+	
+	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('status')); ?>:</b>
+	<?php Yii::app()->params["app"]["programTypesArray"]; ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('upVotes')); ?>:</b>

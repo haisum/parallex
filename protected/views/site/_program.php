@@ -1,7 +1,7 @@
 <?php if($programs){ ?>
 	<?php foreach($programs as $program){ ?>
 	<!-- program  -->
-	<div id="<?php echo "{$programType}_{$program['id']}"; ?>" class="program" itemscope itemtype="http://schema.org/MusicVideoObject">
+	<div id="<?php echo "program_{$program['id']}"; ?>" class="program" itemscope itemtype="http://schema.org/MusicVideoObject">
     	
         <img  src="<?php echo $program["image"]; ?>" class="thumbnail" alt="Wonder" itemprop="image"/>
              

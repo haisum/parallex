@@ -93,7 +93,7 @@ class SettingController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Setting']))
+		if(isset($_POST['Setting']) && $_POST['Setting']['category'] === "slider")
 		{
 			$model->attributes=$_POST['Setting'];
 			if($model->save()){
@@ -160,7 +160,7 @@ class SettingController extends Controller
 		$model=Setting::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
-		$model->value = Yii::app()->setting->get($model->key);
+		$model->value = Yii::app()->setting->get($model->key, $model->category);
 		return $model;
 	}
 

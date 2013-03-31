@@ -31,11 +31,31 @@ Note: Don't edit main frame, except comment area
 				<div class="top-link" id="current-user" style="color:white;">Welcome, <?php echo Yii::app()->user->name; ?>&nbsp;</div>
 				<a href="<?php echo $this->createUrl('/site/logout'); ?>" class="top-link"> Logout </a>
 			</div>
-			<form class="top-link" id="search-form">
-				<input type="text" value="Search Keywords" id="search" name="search"  
-					onfocus="if(this.value == 'Search Keywords') {this.value = '';}"  
-					onblur="if (this.value == '') {this.value = 'Search Keywords';}" />
-				<button type="submit" id="search_btn"  class="button alignLeft"><img src="images/search-button.png" alt="search"/></button>
+			<form class="top-link" id="search-form" action="javascript:;">
+				<?php
+				$tempData = CHtml::listData(Program::model()->findAll(), 'id', 'name');
+				$data = array();
+				foreach ($tempData as $key => $value) {
+					$data[] = array("label" => $value,
+									"value" => $value,
+									"id" => $key
+									);
+				}
+				$this->widget('zii.widgets.jui.CJuiAutoComplete',array(
+				    'name'=>'search',
+				    'source'=>$data,
+				    // additional javascript options for the autocomplete plugin
+				    'options'=>array(
+				    	'select' => 'js:function(event, ui){
+				    		$("#program_"+ui.item.id).click();
+				    	}'
+				    ),
+				    'htmlOptions' => array(
+				    	'placeholder' => 'Search'
+				    )
+				));
+				?>
+				<img src="images/search-button.png" alt="search"/>
 			</form>
 		</div>
                 
@@ -49,7 +69,7 @@ Note: Don't edit main frame, except comment area
 					<?php if(count($programs["music"]["programs"]) > 0){ ?>
                 	<ul>
                 		<?php foreach($programs["music"]["programs"] as $program){ ?>
-                			<li><a href="javascript:;" onclick="$('#music_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
+                			<li><a href="javascript:;" onclick="$('#program_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
                 		<?php } ?>
                 	</ul>
                 	<?php } ?>
@@ -58,7 +78,7 @@ Note: Don't edit main frame, except comment area
                 	<?php if(count($programs["drama"]["programs"]) > 0){ ?>
                 	<ul>
                 		<?php foreach($programs["drama"]["programs"] as $program){ ?>
-                			<li><a href="javascript:;" onclick="$('#drama_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
+                			<li><a href="javascript:;" onclick="$('#program_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
                 		<?php } ?>
                 	</ul>
                 	<?php } ?>
@@ -68,7 +88,7 @@ Note: Don't edit main frame, except comment area
                 	<?php if(count($programs["shows"]["programs"]) > 0){ ?>
                 	<ul>
                 		<?php foreach($programs["shows"]["programs"] as $program){ ?>
-                			<li><a href="javascript:;" onclick="$('#shows_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
+                			<li><a href="javascript:;" onclick="$('#program_<?php echo $program["id"]; ?>').click();"><?php echo $program["name"]; ?></a></li>
                 		<?php } ?>
                 	</ul>
                 	<?php } ?>

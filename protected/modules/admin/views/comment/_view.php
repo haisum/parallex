@@ -5,12 +5,8 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('programId')); ?>:</b>
-	<?php echo CHtml::encode($data->programId); ?>
+	<?php echo CHtml::encode($data->program->name); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
@@ -30,14 +26,14 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('postedTime')); ?>:</b>
-	<?php echo CHtml::encode($data->postedTime); ?>
+	<?php echo date("F jS, Y", strtotime($data->postedTime)); ?>
 	<br />
 
-	<?php /*
+	<?php/* 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status')); ?>:</b>
-	<?php echo CHtml::encode($data->status); ?>
+	<?php echo Yii::app()->params[$data->status; ?>
 	<br />
-
-	*/ ?>
+*/
+	 ?>
 
 </div>

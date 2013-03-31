@@ -70,7 +70,7 @@ return array(
 			'routes'=>array(
 				array(
 					'class'=>'CWebLogRoute',
-					'levels'=>'error, warning',
+					'levels'=>'error, warning, trace, info',
 				),
 				// uncomment the following to show log messages on web pages
 				/*

@@ -53,25 +53,67 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'birthday'); ?>
-		<?php echo $form->textField($model,'birthday'); ?>
+		<?php Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
+            $this->widget('CJuiDateTimePicker',array(
+                'model'=>$model, //Model object
+                'attribute'=>'birthday', //attribute name
+                'mode'=>'datetime', //use "time","date" or "datetime" (default)
+                'options' => array(
+                	'dateFormat' => 'yy-mm-dd',
+                	'timeFormat' => 'hh:mm:00'
+                ),
+                'language' => '',
+                'htmlOptions' => array(
+                	"readonly" => "readonly"
+                )
+            ));
+        ?>
 		<?php echo $form->error($model,'birthday'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'lastLogin'); ?>
-		<?php echo $form->textField($model,'lastLogin'); ?>
+		<?php Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
+            $this->widget('CJuiDateTimePicker',array(
+                'model'=>$model, //Model object
+                'attribute'=>'lastLogin', //attribute name
+                'mode'=>'datetime', //use "time","date" or "datetime" (default)
+                'options' => array(
+                	'dateFormat' => 'yy-mm-dd',
+                	'timeFormat' => 'hh:mm:00'
+                ),
+                'language' => '',
+                'htmlOptions' => array(
+                	"readonly" => "readonly"
+                )
+            ));
+        ?>
 		<?php echo $form->error($model,'lastLogin'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'registerDate'); ?>
-		<?php echo $form->textField($model,'registerDate'); ?>
+		<?php Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
+            $this->widget('CJuiDateTimePicker',array(
+                'model'=>$model, //Model object
+                'attribute'=>'registerDate', //attribute name
+                'mode'=>'datetime', //use "time","date" or "datetime" (default)
+                'options' => array(
+                	'dateFormat' => 'yy-mm-dd',
+                	'timeFormat' => 'hh:mm:00'
+                ),
+                'language' => '',
+                'htmlOptions' => array(
+                	"readonly" => "readonly"
+                )
+            ));
+        ?>
 		<?php echo $form->error($model,'registerDate'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textField($model,'type'); ?>
+		<?php echo $form->dropDownList($model,'type', Yii::app()->params["app"]["userTypesArray"]); ?>
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 

@@ -85,7 +85,6 @@ class Setting extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('category',$this->category,true);
 		$criteria->compare('key',$this->key,true);
-		$criteria->compare('value',$this->value,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

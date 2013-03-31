@@ -45,15 +45,26 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
+		array(
+			'name' => 'title',
+			'type' => 'raw',
+			'value' => 'CHtml::image(Yii::app()->baseUrl. "/" . $data->image->path, "thumbnail", array("style" => "width:100px;"))',
+			'header' => 'Image',
+			'filter' => false,
+		),
 		'name',
 		'url',
-		'description',
-		'imageId',
-		'timing',
+		array(
+			'name' => 'timing',
+			'value' => 'date("l, h:i A", strtotime($data->timing))'
+		),
+		array(
+			'name' => 'type',
+			'value' => 'Yii::app()->params["app"]["programTypesArray"][$data->type]',
+			'filter' => Yii::app()->params["app"]["programTypesArray"]
+		),
 		/*
 		'status',
-		'type',
 		'upVotes',
 		'downVotes',
 		*/

@@ -14,6 +14,11 @@
  */
 class Image extends CActiveRecord
 {
+	public $type = 0;//see config/app.php for default image type kept to program for now
+	public $position = 1;
+	public $itemId = 0;
+	public $programName = "";
+	public $uploadedImage = "";
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -43,10 +48,12 @@ class Image extends CActiveRecord
 			array('title, path, lastModified', 'required'),
 			array('title', 'length', 'max'=>255),
 			array('type', 'length', 'max'=>4),
+			array('uploadedImage', 'file', 'types' => 'jpeg,jpg,png,gif', 'allowEmpty' => true),
+			array('uploadedImage', 'file', 'types' => 'jpeg,jpg,png,gif', 'allowEmpty' => false, 'on' => 'create'),
 			array('position, itemId', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, path, type, position, itemId, lastModified', 'safe', 'on'=>'search'),
+			array('id, title, path, type, position, itemId, lastModified, programName', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,7 +76,7 @@ class Image extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'Title',
-			'path' => 'Path',
+			'path' => 'Image',
 			'type' => 'Type',
 			'position' => 'Position',
 			'itemId' => 'Item',
@@ -87,14 +94,13 @@ class Image extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('path',$this->path,true);
-		$criteria->compare('type',$this->type,true);
-		$criteria->compare('position',$this->position,true);
-		$criteria->compare('itemId',$this->itemId,true);
-		$criteria->compare('lastModified',$this->lastModified,true);
+		$criteria->compare('t.id',$this->id,true);
+		$criteria->compare('t.title',$this->title,true);
+		$criteria->compare('t.path',$this->path,true);
+		$criteria->compare('t.type',$this->type,true);
+		$criteria->compare('t.position',$this->position,true);
+		$criteria->compare('t.itemId',$this->itemId,true);
+		$criteria->compare('t.lastModified',$this->lastModified,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -15,6 +15,7 @@
  */
 class Comment extends CActiveRecord
 {
+	public $programName = "";
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -50,7 +51,7 @@ class Comment extends CActiveRecord
 			array('email', 'length', 'max'=>60),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, programId, name, email, website, comment, postedTime, status', 'safe', 'on'=>'search'),
+			array('id, programId, name, email, website, comment, programName, postedTime, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +63,7 @@ class Comment extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'program' => array(self::BELONGS_TO, 'Program', 'programId'),
 		);
 	}
 
@@ -79,6 +81,7 @@ class Comment extends CActiveRecord
 			'comment' => 'Comment',
 			'postedTime' => 'Posted Time',
 			'status' => 'Status',
+			'programName' => 'Program'
 		);
 	}
 
@@ -92,15 +95,16 @@ class Comment extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('programId',$this->programId);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('website',$this->website,true);
-		$criteria->compare('comment',$this->comment,true);
-		$criteria->compare('postedTime',$this->postedTime,true);
-		$criteria->compare('status',$this->status);
+		$criteria->with = array('program');
+		$criteria->compare('program.name',$this->programName, true);
+		$criteria->compare('t.id',$this->id);
+		$criteria->compare('t.programId',$this->programId);
+		$criteria->compare('t.name',$this->name,true);
+		$criteria->compare('t.email',$this->email,true);
+		$criteria->compare('t.website',$this->website,true);
+		$criteria->compare('t.comment',$this->comment,true);
+		$criteria->compare('t.postedTime',$this->postedTime,true);
+		$criteria->compare('t.status',$this->status);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

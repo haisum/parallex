@@ -35,25 +35,39 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'imageId'); ?>
-		<?php echo $form->textField($model,'imageId'); ?>
+		<?php echo $form->dropDownList($model,'imageId', CHtml::listData(Image::model()->findAll("type = " . Yii::app()->params["app"]["imageTypes"]["program"]), "id", "title")); ?>
 		<?php echo $form->error($model,'imageId'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'timing'); ?>
-		<?php echo $form->textField($model,'timing'); ?>
+		<?php Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
+            $this->widget('CJuiDateTimePicker',array(
+                'model'=>$model, //Model object
+                'attribute'=>'timing', //attribute name
+                'mode'=>'datetime', //use "time","date" or "datetime" (default)
+                'options' => array(
+                	'dateFormat' => 'yy-mm-dd',
+                	'timeFormat' => 'hh:mm:00'
+                ),
+                'language' => '',
+                'htmlOptions' => array(
+                	"readonly" => "readonly"
+                )
+            ));
+        ?>
 		<?php echo $form->error($model,'timing'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
+		<?php echo $form->dropDownList($model,'status', Yii::app()->params["app"]["programStatusArray"]); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textField($model,'type',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->dropDownList($model,'type', Yii::app()->params["app"]["programTypesArray"]); ?>
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 

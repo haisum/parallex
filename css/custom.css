@@ -1,12 +1,13 @@
 /* Media Banq */
 /* Media Banq */
 .header {
-	z-index: 999999999999;
+	z-index: 900;
 }
 .headerContent {
-	z-index: 9999999 !important;
+	z-index: 800 !important;
 	position: relative;
 }
+.ui-autocomplete { position: absolute; cursor: default;z-index:1000 !important;}  
 .isotope_items .large{width:184px;}
 .header .headerContent .nav {
 	clear:right;

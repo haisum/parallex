@@ -44,9 +44,9 @@ class Program extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, url, description, imageId, timing, type', 'required'),
-			array('imageId, status', 'numerical', 'integerOnly'=>true),
+			array('imageId, status, upVotes, downVotes', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
-			array('type, upVotes, downVotes', 'length', 'max'=>10),
+			array('type', 'in', 'range'=>Yii::app()->params["app"]["programTypes"]),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, url, description, imageId, timing, status, type, upVotes, downVotes', 'safe', 'on'=>'search'),
@@ -62,7 +62,7 @@ class Program extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			"image" => array(self::BELONGS_TO, "Image", "imageId"),
-			"comments" => array(self::HAS_MANY, "Comment", "programId")
+			"comments" => array(self::HAS_MANY, "Comment", "programId", "condition" => "comments.status = " . Yii::app()->params["app"]["commentStatus"]["Approved"] ." OR comments.status is null")
 		);
 	}
 
@@ -95,17 +95,17 @@ class Program extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('imageId',$this->imageId);
-		$criteria->compare('timing',$this->timing,true);
-		$criteria->compare('status',$this->status);
-		$criteria->compare('type',$this->type,true);
-		$criteria->compare('upVotes',$this->upVotes,true);
-		$criteria->compare('downVotes',$this->downVotes,true);
+		$criteria->with = array('image');
+		$criteria->compare('t.id',$this->id);
+		$criteria->compare('t.name',$this->name,true);
+		$criteria->compare('t.url',$this->url,true);
+		$criteria->compare('t.description',$this->description,true);
+		$criteria->compare('t.imageId',$this->imageId);
+		$criteria->compare('t.timing',$this->timing,true);
+		$criteria->compare('t.status',$this->status);
+		$criteria->compare('t.type',$this->type,true);
+		$criteria->compare('t.upVotes',$this->upVotes,true);
+		$criteria->compare('t.downVotes',$this->downVotes,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

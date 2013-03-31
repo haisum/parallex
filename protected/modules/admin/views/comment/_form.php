@@ -16,12 +16,6 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'programId'); ?>
-		<?php echo $form->textField($model,'programId'); ?>
-		<?php echo $form->error($model,'programId'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'name'); ?>
@@ -47,14 +41,27 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'postedTime'); ?>
-		<?php echo $form->textField($model,'postedTime'); ?>
+		<?php Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
+            $this->widget('CJuiDateTimePicker',array(
+                'model'=>$model, //Model object
+                'attribute'=>'postedTime', //attribute name
+                'mode'=>'datetime', //use "time","date" or "datetime" (default)
+                'options' => array(
+                	'dateFormat' => 'yy-mm-dd',
+                	'timeFormat' => 'hh:mm:00'
+                ),
+                'language' => '',
+                'htmlOptions' => array(
+                	"readonly" => "readonly"
+                )
+            ));
+        ?>
 		<?php echo $form->error($model,'postedTime'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
-		<?php echo $form->error($model,'status'); ?>
+		<?php echo $form->dropDownList($model,'status', Yii::app()->params["app"]["commentStatusArray"]); ?>
 	</div>
 
 	<div class="row buttons">

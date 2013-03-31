@@ -152,7 +152,7 @@ class ProgramController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Program::model()->findByPk($id);
+		$model=Program::model()->with('image')->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
